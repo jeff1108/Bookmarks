@@ -16,7 +16,14 @@ class Bookmarks
     end
   end
 
-
+  def self.create(address)
+    Bookmarks.testing
+    @connection.exec("INSERT INTO bookmarks (url) VALUES ('#{address[:url]}')")
+  end
+  #
+  # def self.real?(url)
+  #   url =~ /\A#{URI::regexp(['http', 'https'])}\z/
+  # end
 
 
 end

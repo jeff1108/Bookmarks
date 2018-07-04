@@ -12,4 +12,5 @@ group :test do
   gem 'simplecov', require: false
   gem 'simplecov-console', require: false
   gem 'pg'
+  gem 'sinatra-flash'
 end

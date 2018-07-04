@@ -1,5 +1,11 @@
-<ul>
-  <% @bookmarks.each do |bookmark| %>
-    <li><%= bookmark %></li>
-  <% end %>
-</ul>
+<body style="background-color:powderblue;">
+<h1 style="color:white;" align="center"> BOOKMARKS </h1>
+
+<form name="input" action="/bookmarks" method="GET">
+  <input type="submit" value="View Bookmarks">
+</form>
+<form name="input" action="/bookmarks/new" method="GET">
+  <input type="submit" value="Create Bookmark">
+</form>
+
+</body>
