@@ -47,4 +47,14 @@ describe Bookmarks do
         expect(bookmark_1).to eq (bookmark_2)
       end
     end
+
+    describe '.delete' do
+      it 'deletes a bookmark' do
+        Bookmarks.create('http://makersacademy.com', "Maker")
+        Bookmarks.delete(1)
+        bookmarks = Bookmarks.all
+        urls = bookmarks.map(&:url)
+        expect(urls).not_to include "http://www.makersacademy.com"
+      end
+    end
 end

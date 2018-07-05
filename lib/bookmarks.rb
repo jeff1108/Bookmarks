@@ -32,5 +32,9 @@ class Bookmarks
     @id = other.id
   end
 
+  def self.delete(id)
+    Bookmarks.testing
+    result = @connection.exec("DELETE FROM bookmarks WHERE id = '#{id}' ")
+  end
 
 end

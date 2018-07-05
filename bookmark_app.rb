@@ -6,6 +6,7 @@ require 'uri'
 class BookmarkWeb < Sinatra::Base
   enable :sessions
   register Sinatra::Flash
+  set :method_override, true
 
   get '/' do
     erb :index
@@ -20,7 +21,7 @@ class BookmarkWeb < Sinatra::Base
     erb :new
   end
 
-  post '/save' do
+  post '/bookmarks' do
     if params['url'] =~ /\A#{URI::regexp(['http', 'https'])}\z/
       Bookmarks.create(params['url'], params['title'])
       redirect '/'
@@ -28,6 +29,13 @@ class BookmarkWeb < Sinatra::Base
       flash[:notice] = 'You must submit a valid url'
       redirect '/bookmarks/new'
     end
+  end
+
+  delete '/bookmarks/:id' do
+    Bookmarks.delete(params['id'])
+    # connection = PG.connect(dbname: 'bookmark_manager_test')
+    # connection.exec("DELETE FROM bookmarks WHERE id = #{param['id']} RETURNING id")
+    redirect '/bookmarks'
   end
 
 
