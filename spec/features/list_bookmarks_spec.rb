@@ -11,14 +11,14 @@ feature 'Bookmarks' do
     # connection.exec "INSERT INTO bookmarks (url) VALUES('http://makersacademy.com');"
     # connection.exec "INSERT INTO bookmarks (url) VALUES('http://destroyallsoftware.com');"
     # connection.exec "INSERT INTO bookmarks (url) VALUES('http://google.com');"
-    Bookmarks.create(url: 'http://makersacademy.com')
-    Bookmarks.create(url: 'http://destroyallsoftware.com')
-    Bookmarks.create(url: 'http://google.com')
+    Bookmarks.create('http://makersacademy.com', 'Maker')
+    Bookmarks.create('http://destroyallsoftware.com', 'Destroy')
+    Bookmarks.create('http://google.com', 'Google')
     visit('/')
     click_button("View Bookmarks")
-    expect(page).to have_content 'http://makersacademy.com'
-    expect(page).to have_content 'http://destroyallsoftware.com'
-    expect(page).to have_content 'http://google.com'
+    expect(page).to have_content 'Maker'
+    expect(page).to have_content 'Destroy'
+    expect(page).to have_content 'Google'
   end
 
 end

@@ -1,11 +1,17 @@
 require 'pg'
 class Bookmarks
+  attr_reader :id, :url, :title
+  def initialize(id, url, title)
+    @id = id
+    @url = url
+    @title = title
+  end
 
   def self.all
     Bookmarks.testing
     # connection = PG.connect(dbname: 'bookmark_manager')
     result = @connection.exec("SELECT * FROM bookmarks")
-    result.map { |bookmark| bookmark['url'] }
+    result.map { |bookmark| Bookmarks.new(bookmark['id'], bookmark['url'], bookmark['title']) }
   end
 
   def self.testing
@@ -16,14 +22,15 @@ class Bookmarks
     end
   end
 
-  def self.create(address)
+  def self.create(address, title)
     Bookmarks.testing
-    @connection.exec("INSERT INTO bookmarks (url) VALUES ('#{address[:url]}')")
+    result = @connection.exec("INSERT INTO bookmarks (url, title) VALUES ('#{address}', '#{title}') RETURNING id, url, title")
+    Bookmarks.new(result.first['id'], result.first['url'], result.first['title'])
   end
-  #
-  # def self.real?(url)
-  #   url =~ /\A#{URI::regexp(['http', 'https'])}\z/
-  # end
+
+  def ==(other)
+    @id = other.id
+  end
 
 
 end

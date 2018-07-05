@@ -1,7 +1,10 @@
 <body style="background-color:powderblue;">
 <ul>
   <% @bookmarks.each do |bookmark| %>
-    <li><%= bookmark %></li>
+  <li>
+    <a href= "<%= bookmark.url %> ">
+    <%= bookmark.title %>
+  </li>
   <% end %>
 </ul>
 </body>

@@ -22,7 +22,7 @@ class BookmarkWeb < Sinatra::Base
 
   post '/save' do
     if params['url'] =~ /\A#{URI::regexp(['http', 'https'])}\z/
-      Bookmarks.create(url: params['url'])
+      Bookmarks.create(params['url'], params['title'])
       redirect '/'
     else
       flash[:notice] = 'You must submit a valid url'
