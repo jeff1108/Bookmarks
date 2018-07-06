@@ -1,7 +1,11 @@
 require './bookmark_app.rb'
 
+# As a user
+# So that I can remember a website I like
+# I would like to be able to add a new bookmark
+
 feature 'create' do
-  scenario 'save a new bookmark' do
+  scenario 'should save a new bookmark' do
     visit('/')
     click_button('Create Bookmark')
     fill_in 'url', with: 'http://google.com'

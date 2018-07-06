@@ -5,7 +5,7 @@ require './bookmark_app.rb'
 # I want to delete a bookmark
 
 feature 'Deleting a bookmark' do
-  scenario 'user can delete a bookmark' do
+  scenario 'should delete a bookmark' do
     Bookmarks.create('http://makersacademy.com', 'Maker')
     visit('/')
     click_button('View Bookmarks')

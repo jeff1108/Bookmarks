@@ -57,4 +57,32 @@ describe Bookmarks do
         expect(urls).not_to include "http://www.makersacademy.com"
       end
     end
+
+    describe '.update' do
+      it 'update a bookmark' do
+        bookmark = Bookmarks.create('http://google.com', "Google")
+        Bookmarks.update(bookmark.id, 'http://www.snakersacademy.com', "Snakers Academy")
+        bookmarks = Bookmarks.all
+        # expect(bookmarks).to include 'Snakers Academy'
+        # expect(bookmarks).to include 'http://www.snakersacademy.com'
+        # expect(bookmarks).not_to include 'Google'
+        # expect(bookmarks).not_to include 'http://google.com'
+        urls = bookmarks.map(&:url)
+        titles = bookmarks.map(&:title)
+
+        expect(urls).not_to include "http://google.com"
+        expect(titles).not_to include "Google"
+        expect(urls).to include "http://www.snakersacademy.com"
+        expect(titles).to include "Snakers Academy"
+      end
+    end
+
+    describe '.find' do
+      it "find the bookmark" do
+        bookmark = Bookmarks.create('http://www.makersacademy.com', "Maker")
+        bookmark = Bookmarks.find(bookmark.id)
+        expect(bookmark.url).to eq 'http://www.makersacademy.com'
+        expect(bookmark.title).to eq 'Maker'
+      end
+    end
 end

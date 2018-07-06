@@ -22,8 +22,7 @@ class BookmarkWeb < Sinatra::Base
   end
 
   post '/bookmarks' do
-    if params['url'] =~ /\A#{URI::regexp(['http', 'https'])}\z/
-      Bookmarks.create(params['url'], params['title'])
+    if Bookmarks.create(params['url'], params['title'])
       redirect '/'
     else
       flash[:notice] = 'You must submit a valid url'
@@ -36,6 +35,21 @@ class BookmarkWeb < Sinatra::Base
     # connection = PG.connect(dbname: 'bookmark_manager_test')
     # connection.exec("DELETE FROM bookmarks WHERE id = #{param['id']} RETURNING id")
     redirect '/bookmarks'
+  end
+
+  get '/bookmarks/:id/edit' do
+    # @bookmark_id = params['id']
+    @bookmark = Bookmarks.find(params['id'])
+    erb :edit
+  end
+
+  patch '/bookmarks/:id' do
+    if Bookmarks.update(params['id'], params['url'], params['title'])
+      redirect '/bookmarks'
+    else
+      flash[:notice] = 'You must submit a valid url'
+      redirect '/bookmarks/:id/edit'
+    end
   end
 
 

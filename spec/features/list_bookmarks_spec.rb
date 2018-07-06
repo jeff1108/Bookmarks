@@ -5,7 +5,7 @@ require './bookmark_app.rb'
 # I would like to be able to see a list of my bookmarks
 
 feature 'Bookmarks' do
-  scenario 'return list of my bookmarks' do
+  scenario 'should return list of my bookmarks' do
     # require 'pg'
     # connection = PG.connect(dbname: 'bookmark_manager_test')
     # connection.exec "INSERT INTO bookmarks (url) VALUES('http://makersacademy.com');"

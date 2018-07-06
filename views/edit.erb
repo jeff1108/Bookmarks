@@ -1,0 +1,10 @@
+<body style="background-color:powderblue;">
+  <form action="/bookmarks/<%= @bookmark.id %>" method="POST">
+    Url:<input type="text" placeholder="<%=@bookmark.url%>" name="url" />
+    Title:<input type="text" placeholder="<%=@bookmark.title%>" name="title" />
+    <input type="hidden" name="id" value="<%= @bookmark.id %>">
+    <input type="hidden" name="_method" value="PATCH">
+    <input type="submit" value="Submit" />
+  </form>
+<%= styled_flash%>
+</body>
